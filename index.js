@@ -32,6 +32,19 @@ inquirer
           return true;
         };
       }
+      if (question[1] === "textColor" || question[1] === "shapeColor") {
+    obj.validate = function (input) {
+      // Check if input is a valid hexadecimal color code
+      if (/^#([0-9a-f]{3}){1,2}$/i.test(input)) {
+        return true;
+      }
+      // Check if input is a valid color name 
+      if (/^[a-z]+$/i.test(input)) {
+        return true;
+      }
+      return "Please enter a valid color name or hexadecimal color code.";
+    };
+  }
       return obj;
     })
   )
