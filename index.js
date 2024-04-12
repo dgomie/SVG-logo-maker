@@ -53,24 +53,22 @@ function init() {
     )
     .then((answers) => {
       let svgContent = ''
-      console.log(answers);
+      // console.log(answers);
+
       const { text, textColor, shape, shapeColor } = answers;
       switch (shape) {
         case "Triangle":
           const triangle = new shapes.Triangle(text, textColor, shapeColor);
-          // console.log(triangle.render());
           svgContent = triangle.render()
           break;
 
         case "Circle":
           const circle = new shapes.Circle(text, textColor, shapeColor);
-          // console.log(circle.render());
           svgContent = circle.render()
           break;
 
         default:
           const square = new shapes.Square(text, textColor, shapeColor);
-          // console.log(square.render());
           svgContent = square.render()
           break;
       }
@@ -86,10 +84,8 @@ function init() {
     })
     .catch((error) => {
       if (error.isTtyError) {
-        // Prompt couldn't be rendered in the current environment
       } else {
         return console.log("Something went wrong");
-        // Something else went wrong
       }
     });
 }
