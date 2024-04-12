@@ -53,6 +53,23 @@ function init() {
     )
     .then((answers) => {
       console.log(answers);
+      const {text, textColor, shape, shapeColor} = answers
+      switch (shape) {
+        case "Triangle":
+          const triangle = new shapes.Triangle(text, textColor, shapeColor);
+          console.log(triangle.render())
+          break;
+
+          case "Circle":
+            const circle = new shapes.Circle(text, textColor, shapeColor);
+            console.log(circle.render())
+            break;
+      
+        default:
+          const square = new shapes.Square(text, textColor, shapeColor);
+          console.log(square.render())
+          break;
+      }
     })
     .catch((error) => {
       if (error.isTtyError) {
