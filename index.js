@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
-const shapes = require('./lib/shapes.js')
-
+const shapes = require("./lib/shapes.js");
+const fs = require("fs");
 
 const questions = [
   ["input", "text", "What is the logo text? (Up to 3 characters max):"],
@@ -23,7 +23,7 @@ function init() {
           message: question[2],
           name: question[1],
         };
-        
+
         if (question[0] === "list") {
           obj.choices = question[3];
         }
@@ -36,40 +36,53 @@ function init() {
           };
         }
         if (question[1] === "textColor" || question[1] === "shapeColor") {
-      obj.validate = function (input) {
-        // Check if input is a valid hexadecimal color code
-        if (/^#([0-9a-f]{3}){1,2}$/i.test(input)) {
-          return true;
+          obj.validate = function (input) {
+            // Check if input is a valid hexadecimal color code
+            if (/^#([0-9a-f]{3}){1,2}$/i.test(input)) {
+              return true;
+            }
+            // Check if input is a valid color name
+            if (/^[a-z]+$/i.test(input)) {
+              return true;
+            }
+            return "Please enter a valid color name or hexadecimal color code.";
+          };
         }
-        // Check if input is a valid color name 
-        if (/^[a-z]+$/i.test(input)) {
-          return true;
-        }
-        return "Please enter a valid color name or hexadecimal color code.";
-      };
-    }
         return obj;
       })
     )
     .then((answers) => {
+      let svgContent = ''
       console.log(answers);
-      const {text, textColor, shape, shapeColor} = answers
+      const { text, textColor, shape, shapeColor } = answers;
       switch (shape) {
         case "Triangle":
           const triangle = new shapes.Triangle(text, textColor, shapeColor);
-          console.log(triangle.render())
+          // console.log(triangle.render());
+          svgContent = triangle.render()
           break;
 
-          case "Circle":
-            const circle = new shapes.Circle(text, textColor, shapeColor);
-            console.log(circle.render())
-            break;
-      
+        case "Circle":
+          const circle = new shapes.Circle(text, textColor, shapeColor);
+          // console.log(circle.render());
+          svgContent = circle.render()
+          break;
+
         default:
           const square = new shapes.Square(text, textColor, shapeColor);
-          console.log(square.render())
+          // console.log(square.render());
+          svgContent = square.render()
           break;
       }
+
+      fs.writeFile(`./examples/${text}-logo.svg`, svgContent, (err) =>
+      err
+        ? console.error(err)
+        : console.log(
+            `Generated ${text}-logo.svg`
+          )
+    );
+
     })
     .catch((error) => {
       if (error.isTtyError) {
@@ -79,7 +92,6 @@ function init() {
         // Something else went wrong
       }
     });
-};
+}
 
-
-init()
+init();
