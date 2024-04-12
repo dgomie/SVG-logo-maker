@@ -1,6 +1,8 @@
 const inquirer = require("inquirer");
 const shapes = require("./lib/shapes.js");
 const fs = require("fs");
+const cssColor = require("./lib/colors.js");
+const cssColorLowercase = cssColor.map(color => color.toLowerCase());
 
 const questions = [
   ["input", "text", "What is the logo text? (Up to 3 characters max):"],
@@ -29,8 +31,8 @@ function init() {
         }
         if (question[1] === "text") {
           obj.validate = function (input) {
-            if (input.length > 3) {
-              return "Logo text must be 3 characters or less.";
+            if (input.length > 3 || input.length === 0) {
+              return "Logo text must be between 1-3 characters.";
             }
             return true;
           };
@@ -42,7 +44,7 @@ function init() {
               return true;
             }
             // Check if input is a valid color name
-            if (/^[a-z]+$/i.test(input)) {
+            if (cssColorLowercase.includes(input.toLowerCase())) {
               return true;
             }
             return "Please enter a valid color name or hexadecimal color code.";
@@ -52,35 +54,30 @@ function init() {
       })
     )
     .then((answers) => {
-      let svgContent = ''
+      let svgContent = "";
       console.log(answers);
 
       const { text, textColor, shape, shapeColor } = answers;
       switch (shape) {
         case "Triangle":
           const triangle = new shapes.Triangle(text, textColor, shapeColor);
-          svgContent = triangle.render()
+          svgContent = triangle.render();
           break;
 
         case "Circle":
           const circle = new shapes.Circle(text, textColor, shapeColor);
-          svgContent = circle.render()
+          svgContent = circle.render();
           break;
 
         default:
           const square = new shapes.Square(text, textColor, shapeColor);
-          svgContent = square.render()
+          svgContent = square.render();
           break;
       }
 
       fs.writeFile(`./examples/${text}-logo.svg`, svgContent, (err) =>
-      err
-        ? console.error(err)
-        : console.log(
-            `Generated ${text}-logo.svg`
-          )
-    );
-
+        err ? console.error(err) : console.log(`Generated ${text}-logo.svg`)
+      );
     })
     .catch((error) => {
       if (error.isTtyError) {

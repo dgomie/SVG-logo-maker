@@ -19,7 +19,7 @@
   To use the application run command 'node index.js'. Follow the CLI prompts. Once all prompts have been answered, a png file will be created in the examples folder.
 
   ## Contributions  
-  N/A
+  Github user [Reinis Ivanovs](https://github.com/slikts): [CSS Color Array](https://gist.github.com/slikts/cfa5bb0ad340b6e01dd711f20a419aec)
 
   ## Tests  
   Run command 'npm test'
