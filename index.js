@@ -53,7 +53,7 @@ function init() {
     )
     .then((answers) => {
       let svgContent = ''
-      // console.log(answers);
+      console.log(answers);
 
       const { text, textColor, shape, shapeColor } = answers;
       switch (shape) {
