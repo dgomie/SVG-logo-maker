@@ -44,7 +44,8 @@ function init() {
               return true;
             }
             // Check if input is a valid color name
-            if (cssColorLowercase.includes(input.toLowerCase())) {
+            const strInput = input.replace(/\s+/g, '').trim();
+            if (cssColorLowercase.includes(strInput.toLowerCase())) {
               return true;
             }
             return "Please enter a valid color name or hexadecimal color code.";
