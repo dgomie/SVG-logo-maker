@@ -1,4 +1,5 @@
 # SVG Logo Maker
+  <img src='./images/example-logo2.png'>
   
   ##### Table of Contents  
   [Description](#description)  
@@ -10,7 +11,7 @@
   [License](#license)  
 
   ## Description  
-  This project allows the user to generate their own logo through CLI prompts. The logo is generated with the use of Inquirer to gather the user's prompts and by utilizing shape classes to render the logo.
+  This project was created to help users create simple logo designs for their projects. The application allows the user to generate their own logo through CLI prompts. The logo is generated through the use of Inquirer to gather the user's prompts in the terminal, and by utilizing shape classes that take those prompts and render a logo.
 
   ## Installation  
   Run the following command to install the required dependencies.
@@ -20,7 +21,9 @@
   
 
   ## Usage  
-  To use the application run command 'node index.js'. Follow the CLI prompts. Once all prompts have been answered, a svg file will be created in the examples folder.
+  To use the application run the command 'node index.js'. Answer the four CLI prompts. Once all prompts have been answered, a svg file will be created in the examples folder.  
+  <img src='./images/svg-prompts.png'>
+  
 
   ## Video Demo
 
@@ -29,10 +32,12 @@
   Github user [Reinis Ivanovs](https://github.com/slikts): [CSS Color Array](https://gist.github.com/slikts/cfa5bb0ad340b6e01dd711f20a419aec)
 
   ## Tests  
-  Run the following command to run tests using jest.
+  Run the following command to run tests using jest. 
   ```
   npm test
   ```
+
+  The shapes.test.js file is a testing suite for the render() methods of the individual shape classes.
 
 
   ## Questions
